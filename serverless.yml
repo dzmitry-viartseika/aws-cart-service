@@ -1,0 +1,36 @@
+service: cart-service-wertey
+frameworkVersion: '3'
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: eu-central-1
+  profile: personal
+  environment:
+    DATABASE_URL: ${env:DATABASE_URL}
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.serverless.config.js
+    includeModules: true
+
+plugins:
+  - serverless-webpack
+  - serverless-webpack-prisma
+  - serverless-offline
+
+functions:
+  main:
+    handler: dist/main.handler
+    events:
+      - httpApi:
+          method: ANY
+          path: /
+          cors: true
+
+      - httpApi:
+          method: ANY
+          path: '/{proxy+}'
+          cors: true
