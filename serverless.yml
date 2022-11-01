@@ -7,9 +7,12 @@ provider:
   name: aws
   runtime: nodejs16.x
   region: eu-central-1
-  profile: personal
   environment:
     DATABASE_URL: ${env:DATABASE_URL}
+    PORT: ${env:PORT_DATABASE}
+    NAME_DATABASE: ${env:NAME_DATABASE}
+    USER_DATABASE: ${env:USER_DATABASE}
+    PASSWORD_DATABASE: ${env:PASSWORD_DATABASE}
 
 custom:
   webpack:
@@ -17,8 +20,6 @@ custom:
     includeModules: true
 
 plugins:
-  - serverless-webpack
-  - serverless-webpack-prisma
   - serverless-offline
 
 functions:
