@@ -3,10 +3,17 @@ frameworkVersion: '3'
 
 useDotenv: true
 
+plugins:
+  - serverless-offline
+
 provider:
   name: aws
   runtime: nodejs16.x
-  region: eu-central-1
+  region: eu-west-1
+  stage: dev
+  timeout: 10
+  httpApi:
+    cors: true
   environment:
     DATABASE_URL: ${env:DATABASE_URL}
     PORT: ${env:PORT_DATABASE}
@@ -14,13 +21,8 @@ provider:
     USER_DATABASE: ${env:USER_DATABASE}
     PASSWORD_DATABASE: ${env:PASSWORD_DATABASE}
 
-custom:
-  webpack:
-    webpackConfig: ./webpack.serverless.config.js
-    includeModules: true
-
-plugins:
-  - serverless-offline
+package:
+  individually: true
 
 functions:
   main:
@@ -28,10 +30,4 @@ functions:
     events:
       - httpApi:
           method: ANY
-          path: /
-          cors: true
-
-      - httpApi:
-          method: ANY
           path: '/{proxy+}'
-          cors: true
