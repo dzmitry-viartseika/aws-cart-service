@@ -2,12 +2,6 @@
 /dist
 /node_modules
 
-DATABASE_URL=rds-cloud-x-database.cfubw7y2i0kk.eu-west-1.rds.amazonaws.com
-PORT_DATABASE=5432
-NAME_DATABASE=cloud_x
-USER_DATABASE=postgres
-PASSWORD_DATABASE=wertey231090
-
 # Logs
 logs
 *.log
